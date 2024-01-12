@@ -10,8 +10,23 @@ async function getUserDataFrom(databaseField, searchField) {
     return snapshot;
 }
 
+// Registeration Views
+function getRegister(req, res) {
+    res.status(200).render('register');
+}
+
+// Login View
+function getLogin(req, res) {
+    res.status(200).render('login');
+}
+
+// Reset Password View
+function postResetPassword(req, res) {
+    res.status(200).render('reset_password');
+}
+
 // Registeration
-async function register(req, res) {
+async function postRegister(req, res) {
     try {
         const data = req.body; // this data will be received from the ui or frontend side
 
@@ -53,7 +68,7 @@ async function register(req, res) {
 }
 
 // Login
-async function login(req, res) {
+async function postLogin(req, res) {
     try {
         const data = req.body;
 
@@ -251,4 +266,4 @@ async function logout(req, res) {
     })
 }
 
-module.exports = { register, login, resetPassword, translateLanguage, logout }
+module.exports = { getRegister, getLogin, resetPassword, translateLanguage, logout, postRegister, postLogin, postResetPassword }

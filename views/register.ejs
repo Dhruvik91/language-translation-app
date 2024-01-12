@@ -8,7 +8,11 @@
 </head>
 
 <body>
-    <form action="#">
+    <form action="api/register" method="post">
+
+        <label for="username">Username: </label>
+        <input type="text" id="username" name="username">
+
         <label for="email">Email : </label>
         <input type="email" id="email" name="email">
 
@@ -17,18 +21,6 @@
 
         <button type="submit" id="submit">Submit</button>
     </form>
-
-
-    <script>
-        const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJxWTB3WWFlSjk5QnBNUHd2SmFDNSIsImlhdCI6MTcwNDc5MjYyNCwiZXhwIjoxNzA0Nzk2MjI0fQ.yAyoHSXT5U3JFqRYYdl1Ccmvtx6dTTUErPLqOV0yj8o";
-        function getProtected() {
-            fetch("http://localhost:8000/protected", {
-                headers: {
-                    'Authorization': TOKEN
-                }
-            })
-        }
-    </script>
 
 </body>
 

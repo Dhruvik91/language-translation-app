@@ -1,5 +1,5 @@
 const admin = require("firebase-admin");
-const serviceAccount = require("./creds.json");
+const serviceAccount = require("C:/Users/DELL/Desktop/creds.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)

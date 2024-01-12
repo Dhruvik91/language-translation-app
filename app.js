@@ -8,6 +8,9 @@ require('dotenv').config()
 
 app.use(express.json());
 
+app.set('views', './views')
+app.set('view engine', 'ejs')
+
 // Create Session
 app.use(session({
     secret: process.env.SESSION_SECRET_KEY,
@@ -15,11 +18,12 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Authentication Paths 
-app.use('/auth', authRoutes);
+app.use('/', authRoutes);
 
 // Access Paths 
 app.use('/protected', protectedRoute);
