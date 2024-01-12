@@ -2,6 +2,7 @@ const firestore = require('../config.js');
 const jwt = require('jsonwebtoken')
 const axios = require('axios')
 const validator = require('email-validator')
+const User = require('../models/usersModel.js')
 
 // Driver function to get data 
 async function getUserDataFrom(databaseField, searchField) {
@@ -21,8 +22,13 @@ function getLogin(req, res) {
 }
 
 // Reset Password View
-function postResetPassword(req, res) {
+function getResetPassword(req, res) {
     res.status(200).render('reset_password');
+}
+
+// Translate Language View
+function getTranslateLanguage(req, res) {
+    res.status(200).render('translate_app');
 }
 
 // Registeration
@@ -46,7 +52,9 @@ async function postRegister(req, res) {
 
         if (snapshot.empty) {
             // Insert Data
-            await firestore.collection("users").add(data);
+            const user = new User(data.name, data.email, data.password);
+            const userData = JSON.parse(JSON.stringify(user));
+            await firestore.collection("users").add(userData);
             res.status(201).json({
                 is_error: "false",
                 message: "Registeration Successfull",
@@ -130,7 +138,7 @@ async function postLogin(req, res) {
 }
 
 // Reset Password
-async function resetPassword(req, res) {
+async function postResetPassword(req, res) {
     try {
         const data = req.body;
 
@@ -162,7 +170,11 @@ async function resetPassword(req, res) {
 
         // Update Data 
         const fieldRef = firestore.collection('users').doc(user.id);
-        await fieldRef.update({ "password": String(data.newpassword) });
+        await fieldRef.update({
+            "password": String(data.newpassword),
+            "isResetPassword.bool": true,
+            "updateAt": new Date()
+        });
 
         res.status(200).json({
             is_error: "false",
@@ -186,7 +198,7 @@ async function resetPassword(req, res) {
 }
 
 // Translate Language
-async function translateLanguage(req, res) {
+async function postTranslateLanguage(req, res) {
     try {
         const { from, to, text } = req.body;
 
@@ -266,4 +278,14 @@ async function logout(req, res) {
     })
 }
 
-module.exports = { getRegister, getLogin, resetPassword, translateLanguage, logout, postRegister, postLogin, postResetPassword }
+module.exports = {
+    getRegister,
+    getLogin,
+    getResetPassword,
+    getTranslateLanguage,
+    postTranslateLanguage,
+    postRegister,
+    postLogin,
+    postResetPassword,
+    logout
+}

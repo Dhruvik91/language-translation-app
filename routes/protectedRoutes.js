@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const verifyToken = require('../middlewares/authMiddleware');
-const { resetPassword, logout, translateLanguage } = require('../controllers/usersControllers')
+const { getResetPassword, logout, postTranslateLanguage, postResetPassword, getTranslateLanguage } = require('../controllers/usersControllers')
 
 // Protected route
-router.post('/resetpassword', verifyToken, resetPassword)
+router.get('/resetpassword', verifyToken, getResetPassword)
+router.post('/api/resetpassword', verifyToken, postResetPassword)
 
 // Translate Language route
-router.post('/translate-language', verifyToken, translateLanguage)
+router.get('/translate-language', verifyToken, getTranslateLanguage)
+router.post('/api/translate-language', verifyToken, postTranslateLanguage)
 
 // Logout Route
 router.get('/logout', verifyToken, logout);

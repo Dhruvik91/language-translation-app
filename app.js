@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', authRoutes);
 
 // Access Paths 
-app.use('/protected', protectedRoute);
+app.use('/', protectedRoute);
 
 app.use(express.static("static"))
 
