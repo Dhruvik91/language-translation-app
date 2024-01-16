@@ -30,8 +30,8 @@
         }
 
         input[type="text"],
-        input[type="email"],
-        input[type="password"] {
+        input[type="to"],
+        input[type="from"] {
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ddd;
@@ -63,8 +63,21 @@
     <div class="translate-container">
         <h2>Translate Language</h2>
         <form action="api/translate-language" method="POST">
-            <input type="text" name="from" id="from" placeholder="From Language" required>
-            <input type="text" name="to" id="to" placeholder="To Language" required>
+            <input type="from" name="from" id="from" placeholder="From" required>
+           <!--  <select name="from" id="from" required>
+                <option value="">Select From Language</option>
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+            </select> -->
+
+            <input type="to" name="to" id="to" placeholder="To" required>
+           <!--  <select name="to" id="to" required>
+                <option value="">Select To Language</option>
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+            </select> -->
             <input type="text" name="text" id="text" placeholder="Text" required>
             <input type="submit" value="Translate">
         </form>

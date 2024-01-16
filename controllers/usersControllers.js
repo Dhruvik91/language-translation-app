@@ -58,12 +58,7 @@ async function postRegister(req, res) {
             res.status(201).json({
                 is_error: "false",
                 message: "Registeration Successfull",
-                data: {
-                    userName: data.name,
-                    email: data.email,
-                    createdAt: new Date(),
-                    updatedAt: new Date()
-                }
+                data: null
             })
         } else {
             res.status(401).json({ is_error: "true", message: "User already exists!", data: null })
@@ -119,11 +114,6 @@ async function postLogin(req, res) {
             is_error: "false",
             message: "Login successfull",
             data: {
-                userId: user.id,
-                userName: user.name,
-                email: user.email,
-                createdAt: new Date(),
-                updatedAt: new Date(),
                 accessToken: token
             }
         });
@@ -180,9 +170,6 @@ async function postResetPassword(req, res) {
             is_error: "false",
             message: "Password Updated",
             data: {
-                userId: user.id,
-                userName: user.name,
-                email: user.email,
                 updatedAt: new Date(),
             }
         });
